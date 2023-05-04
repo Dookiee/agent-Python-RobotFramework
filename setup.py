@@ -4,7 +4,7 @@ import os
 from setuptools import setup, find_packages
 
 
-__version__ = '5.3.3'
+__version__ = '1.0.0'
 
 
 def read_file(fname):
@@ -18,8 +18,8 @@ def read_file(fname):
 
 
 setup(
-    name='robotframework-reportportal',
-    packages=['robotframework_reportportal'],
+    name='robotframework-reportportal-updated',
+    packages=['robotframework_reportportal-updated'],
     package_data={'robotframework_reportportal': ['*.pyi']},
     version=__version__,
     description='Agent for reporting RobotFramework test results to '
