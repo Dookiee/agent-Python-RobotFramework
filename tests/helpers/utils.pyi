@@ -18,7 +18,7 @@ DEFAULT_VARIABLES: Dict[str, Any] = ...
 
 
 def run_robot_tests(tests: List[str],
-                    listener: str = 'robotframework_reportportal-updated.listener',
+                    listener: str = 'robotframework_reportportal_updated.listener',
                     variables: Optional[Dict[str, Any]] = None,
                     arguments: Optional[Dict[str, Any]] = None) -> int: ...
 
