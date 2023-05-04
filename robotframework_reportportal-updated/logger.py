@@ -20,7 +20,7 @@ of an extra kwarg "attachment" to all logging functions.
 Example
 -------
 import subprocess
-from robotframework_reportportal import logger
+from robotframework_reportportal-updated import logger
 
 class MyLibrary(object):
 

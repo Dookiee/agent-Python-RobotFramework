@@ -14,4 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License
 """
 
-REPORT_PORTAL_SERVICE = 'robotframework_reportportal.service.RPClient'
+from six import add_move, MovedModule
+
+add_move(MovedModule('mock', 'mock', 'unittest.mock'))
+
+REPORT_PORTAL_SERVICE = 'robotframework_reportportal-updated.service.RPClient'
