@@ -48,7 +48,7 @@ TEST_DATA_METHODS = [
 
 
 @pytest.mark.parametrize('method, params', TEST_DATA_METHODS)
-@mock.patch('robotframework_reportportal.logger.logger')
+@mock.patch('robotframework_reportportal-updated.logger.logger')
 def test_logger_params_bypass(mock_logger, method, params):
     getattr(logger, method)(*params)
     assert mock_logger.write.call_count == 1

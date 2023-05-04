@@ -19,8 +19,8 @@ def read_file(fname):
 
 setup(
     name='robotframework-reportportal-updated',
-    packages=['robotframework_reportportal-updated'],
-    package_data={'robotframework_reportportal': ['*.pyi']},
+    packages=['robotframework_reportportal-updated-updated'],
+    package_data={'robotframework_reportportal-updated': ['*.pyi']},
     version=__version__,
     description='Agent for reporting RobotFramework test results to '
                 'Report Portal',
@@ -46,7 +46,7 @@ setup(
     install_requires=read_file('requirements.txt').splitlines(),
     entry_points={
         'console_scripts': [
-            'post_report=robotframework_reportportal.post_report:main'
+            'post_report=robotframework_reportportal-updated.post_report:main'
         ]
     },
 )

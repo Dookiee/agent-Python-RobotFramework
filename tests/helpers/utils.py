@@ -27,7 +27,7 @@ DEFAULT_VARIABLES = {
 }
 
 
-def run_robot_tests(tests, listener='robotframework_reportportal.listener',
+def run_robot_tests(tests, listener='robotframework_reportportal-updated.listener',
                     variables=None, arguments=None):
     cmd_arguments = ['--listener', listener]
     if arguments:
