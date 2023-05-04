@@ -128,7 +128,7 @@ class TestListener:
         args, kwargs = mock_client_init.call_args
         assert kwargs['is_skipped_an_issue'] == skipped_issue_value
 
-    @mock.patch('robotframework_reportportal-updated.variables.get_variable')
+    @mock.patch('robotframework_reportportal_updated.variables.get_variable')
     @mock.patch(REPORT_PORTAL_SERVICE)
     @pytest.mark.parametrize(
         'get_var_value, verify_ssl_value, path_exists_value', [
@@ -145,7 +145,7 @@ class TestListener:
                                         path_exists_value):
         """Test case for the RP_VERIFY_SSL bypass."""
         get_var_mock.return_value = get_var_value
-        with mock.patch('robotframework_reportportal-updated.variables.path.exists',
+        with mock.patch('robotframework_reportportal_updated.variables.path.exists',
                         return_value=path_exists_value):
             mock_listener = listener()
             mock_listener._variables = mock_variables

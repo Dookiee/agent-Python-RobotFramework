@@ -28,8 +28,8 @@ def visitor():
     return RobotResultsVisitor()
 
 
-@mock.patch('robotframework_reportportal-updated.variables.strtobool', mock.Mock())
-@mock.patch('robotframework_reportportal-updated.variables.get_variable', mock.Mock())
+@mock.patch('robotframework_reportportal_updated.variables.strtobool', mock.Mock())
+@mock.patch('robotframework_reportportal_updated.variables.get_variable', mock.Mock())
 @fixture()
 def mock_variables():
     mock_variables = Variables()
