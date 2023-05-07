@@ -16,7 +16,7 @@ limitations under the License
 
 import os
 
-from robotframework_reportportal import logger
+from robotframework_reportportal_updated import logger
 
 
 def screenshot_log(level, message, screenshot_file):
