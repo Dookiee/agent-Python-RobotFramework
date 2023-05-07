@@ -14,7 +14,7 @@ limitations under the License.
 
 import pytest
 
-from robotframework_reportportal.model import Keyword
+from robotframework_reportportal_updated.model import Keyword
 
 
 @pytest.mark.parametrize('self_type, parent_type, expected', [
