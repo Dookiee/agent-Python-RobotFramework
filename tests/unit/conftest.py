@@ -18,9 +18,9 @@ import os
 from pytest import fixture
 from six.moves import mock
 
-from robotframework_reportportal.listener import listener
-from robotframework_reportportal.variables import Variables
-from robotframework_reportportal.result_visitor import RobotResultsVisitor
+from robotframework_reportportal_updated.listener import listener
+from robotframework_reportportal_updated.variables import Variables
+from robotframework_reportportal_updated.result_visitor import RobotResultsVisitor
 
 
 @fixture()
