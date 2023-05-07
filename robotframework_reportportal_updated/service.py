@@ -57,7 +57,7 @@ class RobotService(object):
         self.agent_name = 'robotframework-reportportal'
         self.agent_version = get_package_version(self.agent_name)
         self.rp = None
-        self.launch_id = None
+        # self.launch_id = None
 
     def _get_launch_attributes(self, cmd_attrs):
         """Generate launch attributes including both system and user ones.
@@ -155,8 +155,8 @@ class RobotService(object):
         }
         logger.debug(
             'ReportPortal - Finish launch: request_body={0}'.format(fl_rq))
-        if self.launch_id is not None:
-            self.rp.finish_launch(**fl_rq)
+        # if self.launch_id is not None:
+        self.rp.finish_launch(**fl_rq)
 
     def start_suite(self, suite, ts=None):
         """Call start_test method of the common client.
