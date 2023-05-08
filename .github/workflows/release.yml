@@ -68,7 +68,7 @@ jobs:
         with:
           name: 'reportportal.io'
           email: 'support@reportportal.io'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN_GIT }}
 
       - name: Tagging new version
         id: newVersionTag
