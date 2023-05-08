@@ -6,6 +6,7 @@ from setuptools import setup, find_packages
 
 __version__ = '1.1.3'
 
+
 def read_file(fname):
     """Read the given file.
 
