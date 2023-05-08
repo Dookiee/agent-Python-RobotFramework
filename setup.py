@@ -1,7 +1,8 @@
 """Setup instructions for the package."""
 
 import os
-from setuptools import setup
+
+from setuptools import setup, find_packages
 
 __version__ = '1.1.3'
 
