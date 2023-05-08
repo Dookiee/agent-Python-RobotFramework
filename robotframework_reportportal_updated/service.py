@@ -155,7 +155,7 @@ class RobotService(object):
         }
         logger.debug(
             'ReportPortal - Finish launch: request_body={0}'.format(fl_rq))
-        if self.launch_id is not None:
+        if self.launch_id is None:
             self.rp.finish_launch(**fl_rq)
 
     def start_suite(self, suite, ts=None):
