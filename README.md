@@ -24,7 +24,7 @@ First you need to install RobotFramework:
 
 The latest stable version of library is available on PyPI:
 
-    pip install robotframework-reportportal
+    pip install robotframework-reportportal-updated
 
 [reportportal-client](https://github.com/reportportal/client-Python)
 and [six](https://pypi.org/project/six/) will be installed as dependencies
@@ -56,7 +56,7 @@ to `robot` run:
 REQUIRED:
 
 ```
---listener robotframework_reportportal.listener
+--listener robotframework_reportportal_updated.listener
 --variable RP_API_KEY:"your_user_api_key"
 --variable RP_ENDPOINT:"your_reportportal_url"
 --variable RP_LAUNCH:"launch_name"
