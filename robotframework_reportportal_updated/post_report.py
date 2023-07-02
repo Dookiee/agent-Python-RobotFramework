@@ -47,10 +47,10 @@ import sys
 
 from robot.api import ExecutionResult
 
-from robotframework_reportportal.result_visitor import RobotResultsVisitor
-from robotframework_reportportal.time_visitor import TimeVisitor, corrections
+from robotframework_reportportal_updated.result_visitor import RobotResultsVisitor
+from robotframework_reportportal_updated.time_visitor import TimeVisitor, corrections
 # noinspection PyUnresolvedReferences
-from robotframework_reportportal.variables import _variables
+from robotframework_reportportal_updated.variables import _variables
 
 
 def process(infile="output.xml"):
