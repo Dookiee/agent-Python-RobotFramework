@@ -4,7 +4,7 @@ import os
 
 from setuptools import setup, find_packages
 
-__version__ = '1.1.6'
+__version__ = '1.1.7'
 
 
 def read_file(fname):

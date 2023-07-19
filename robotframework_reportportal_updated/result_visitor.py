@@ -133,6 +133,7 @@ class RobotResultsVisitor(ResultVisitor):
 
     def end_keyword(self, kw):
         ts = to_timestamp(kw.endtime if kw.id not in corrections else corrections[kw.id][1])
+        status = 'PASS' if kw.assign else kw.status
         attrs = {
             'type': string.capwords(kw.type),
             'kwname': kw.kwname,
@@ -143,15 +144,18 @@ class RobotResultsVisitor(ResultVisitor):
             'tags': kw.tags,
             'endtime': ts,
             'elapsedtime': kw.elapsedtime,
-            'status': 'PASS' if kw.assign else kw.status,
+            'status': status,
         }
         listener.end_keyword(kw.name, attrs, ts)
+        if status == 'FAIL':
+            for message in kw.messages:
+                self.start_message(message, result=status)
 
-    def start_message(self, msg):
-        if msg.message:
+    def start_message(self, msg, result=None):
+        if result == "FAIL" and msg.message:
             message = {
                 'message': msg.message,
-                'level': msg.level,
+                'level': msg.level
             }
             try:
                 m = self.parse_message(message['message'])
