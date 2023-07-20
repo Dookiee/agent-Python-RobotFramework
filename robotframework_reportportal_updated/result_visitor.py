@@ -13,6 +13,7 @@
 #  limitations under the License.
 
 import re
+import traceback
 import string
 from datetime import datetime
 
@@ -118,35 +119,53 @@ class RobotResultsVisitor(ResultVisitor):
         listener.end_test(test.name, attrs, ts)
 
     def start_keyword(self, kw):
-        ts = to_timestamp(kw.starttime if kw.id not in corrections else corrections[kw.id][0])
-        attrs = {
-            'type': string.capwords(kw.type),
-            'kwname': kw.kwname,
-            'libname': kw.libname,
-            'doc': kw.doc,
-            'args': kw.args,
-            'assign': kw.assign,
-            'tags': kw.tags,
-            'starttime': ts,
-        }
-        listener.start_keyword(kw.name, attrs, ts)
+        try:
+            keyword_status = 'PASS' if kw.assign else kw.status
+            empty_arguments = bool('${' in str(kw.args))
+            keywords_as_library = '_keywords' in '' if kw.libname is None else kw.libname
+
+            if (keyword_status == 'FAIL') or (keyword_status == 'PASS' and not empty_arguments and not keywords_as_library):
+                print("suite ID {} {}.{} - {}".format(kw.id, getattr(kw, 'libname', 'none'),kw.kwname, getattr(kw, 'args', ())))
+                ts = to_timestamp(kw.starttime if kw.id not in corrections else corrections[kw.id][0])
+                attrs = {
+                    'type': string.capwords(kw.type),
+                    'kwname': kw.kwname,
+                    'libname': kw.libname,
+                    'doc': kw.doc,
+                    'args': kw.args,
+                    'assign': kw.assign,
+                    'tags': kw.tags,
+                    'starttime': ts,
+                }
+                listener.start_keyword(kw.name, attrs, ts)
+        except Exception as e:
+            traceback.print_exc()
 
     def end_keyword(self, kw):
-        ts = to_timestamp(kw.endtime if kw.id not in corrections else corrections[kw.id][1])
-        status = 'PASS' if kw.assign else kw.status
-        attrs = {
-            'type': string.capwords(kw.type),
-            'kwname': kw.kwname,
-            'libname': kw.libname,
-            'doc': kw.doc,
-            'args': kw.args,
-            'assign': kw.assign,
-            'tags': kw.tags,
-            'endtime': ts,
-            'elapsedtime': kw.elapsedtime,
-            'status': status,
-        }
-        listener.end_keyword(kw.name, attrs, ts)
+        try:
+            keyword_status = 'PASS' if kw.assign else kw.status
+            empty_arguments = bool('${' in str(kw.args))
+            keywords_as_library = '_keywords' in '' if kw.libname is None else kw.libname
+
+            if (keyword_status == 'FAIL') or (keyword_status == 'PASS' and not empty_arguments and not keywords_as_library):
+                ts = to_timestamp(kw.endtime if kw.id not in corrections else corrections[kw.id][1])
+                status = 'PASS' if kw.assign else kw.status
+                # print("E-suite ID {} {}.{}".format(kw.id, kw.libname, kw.kwname))
+                attrs = {
+                    'type': string.capwords(kw.type),
+                    'kwname': kw.kwname,
+                    'libname': kw.libname,
+                    'doc': kw.doc,
+                    'args': kw.args,
+                    'assign': kw.assign,
+                    'tags': kw.tags,
+                    'endtime': ts,
+                    'elapsedtime': kw.elapsedtime,
+                    'status': status,
+                }
+                listener.end_keyword(kw.name, attrs, ts)
+        except Exception as e:
+            traceback.print_exc()
 
     def start_message(self, msg):
         if msg.parent.status == "FAIL" and msg.message:
