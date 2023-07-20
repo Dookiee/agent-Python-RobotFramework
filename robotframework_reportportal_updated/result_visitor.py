@@ -147,12 +147,9 @@ class RobotResultsVisitor(ResultVisitor):
             'status': status,
         }
         listener.end_keyword(kw.name, attrs, ts)
-        if status == 'FAIL':
-            for message in kw.messages:
-                self.start_message(message, result=status)
 
-    def start_message(self, msg, result=None):
-        if result == "FAIL" and msg.message:
+    def start_message(self, msg):
+        if msg.parent.status == "FAIL" and msg.message:
             message = {
                 'message': msg.message,
                 'level': msg.level
