@@ -121,14 +121,14 @@ class RobotResultsVisitor(ResultVisitor):
     def start_keyword(self, kw):
         try:
             keyword_status = 'PASS' if kw.assign else kw.status
-            empty_arguments = bool('${' in str(kw.args))
-            keywords_as_library = '_keywords' in '' if kw.libname is None else kw.libname
+            acceptable_keyword_type = ['SUITE', 'SETUP', 'TEST', 'TEARDOWN']
+            keyword_type = string.capwords(kw.type).upper()
+            parent_type = getattr(kw.parent, 'type', 'SUITE')
 
-            if (keyword_status == 'FAIL') or (keyword_status == 'PASS' and not empty_arguments and not keywords_as_library):
-                print("suite ID {} {}.{} - {}".format(kw.id, getattr(kw, 'libname', 'none'),kw.kwname, getattr(kw, 'args', ())))
+            if (keyword_status == 'FAIL') or (keyword_type in acceptable_keyword_type) or (parent_type in acceptable_keyword_type):
                 ts = to_timestamp(kw.starttime if kw.id not in corrections else corrections[kw.id][0])
                 attrs = {
-                    'type': string.capwords(kw.type),
+                    'type': keyword_type,
                     'kwname': kw.kwname,
                     'libname': kw.libname,
                     'doc': kw.doc,
@@ -144,15 +144,15 @@ class RobotResultsVisitor(ResultVisitor):
     def end_keyword(self, kw):
         try:
             keyword_status = 'PASS' if kw.assign else kw.status
-            empty_arguments = bool('${' in str(kw.args))
-            keywords_as_library = '_keywords' in '' if kw.libname is None else kw.libname
+            keyword_type = string.capwords(kw.type).upper()
+            acceptable_keyword_type = ['SUITE', 'SETUP', 'TEST', 'TEARDOWN']
+            parent_type = getattr(kw.parent, 'type', 'SUITE')
 
-            if (keyword_status == 'FAIL') or (keyword_status == 'PASS' and not empty_arguments and not keywords_as_library):
+            if (keyword_status == 'FAIL') or (keyword_type in acceptable_keyword_type) or (parent_type in acceptable_keyword_type):
                 ts = to_timestamp(kw.endtime if kw.id not in corrections else corrections[kw.id][1])
                 status = 'PASS' if kw.assign else kw.status
-                # print("E-suite ID {} {}.{}".format(kw.id, kw.libname, kw.kwname))
                 attrs = {
-                    'type': string.capwords(kw.type),
+                    'type': keyword_type,
                     'kwname': kw.kwname,
                     'libname': kw.libname,
                     'doc': kw.doc,
@@ -168,7 +168,8 @@ class RobotResultsVisitor(ResultVisitor):
             traceback.print_exc()
 
     def start_message(self, msg):
-        if msg.parent.status == "FAIL" and msg.message:
+         status = getattr(msg.parent, 'status', 'PASS')
+         if status == "FAIL" and msg.message:
             message = {
                 'message': msg.message,
                 'level': msg.level
